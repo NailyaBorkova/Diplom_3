@@ -1,5 +1,7 @@
-package pageObjects;
+package pageobjects;
 
+import config.Environment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,34 +15,35 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    //Открытие страницы входа
+
+    @Step ("Открытие страницы входа")
     public void open() {
-        driver.get("https://stellarburgers.nomoreparties.site/login");
+        driver.get(Environment.HOST+Environment.ENDPOINT_LOGIN);
     }
 
-    //Ввод: email
+    @Step ("Ввод: email")
     public void enterEmail(String email) {
         driver.findElement(emailInput).sendKeys(email);
     }
 
-    //Ввод password
+    @Step ("Ввод password")
     public void enterPassword(String password) {
         driver.findElement(passwordInput).sendKeys(password);
     }
 
-    //Нажатие на кнопку 'Войти'
+    @Step ("Нажатие на кнопку 'Войти'")
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
 
-    //Авторизация с электронной почтой: email и паролем
+    @Step ("Авторизация с электронной почтой: email и паролем")
     public void login(String email, String password) {
         this.enterEmail(email);
         this.enterPassword(password);
         this.clickLoginButton();
     }
 
-    //Проверка успешного входа в систему
+    @Step ("Проверка успешного входа в систему")
     public boolean isLoginSuccessful() {
         String expectedUrl = "https://stellarburgers.nomoreparties.site/";
         return driver.getCurrentUrl().contains(expectedUrl);

@@ -1,5 +1,6 @@
-package pageObjects;
+package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,32 +17,32 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    //Открытие страницы регистрации
+    @Step("Открытие страницы регистрации")
     public void open() {
         driver.get(registrationUrl);
     }
 
-    //Получение поля ввода имени
+    @Step ("Получение поля ввода имени")
     public WebElement getNameInput() {
         return driver.findElement(By.xpath("//input[@name='name']"));
     }
 
-    //Получение поля ввода электронной почты
+    @Step ("Получение поля ввода электронной почты")
     public WebElement getEmailInput() {
         return driver.findElements(By.cssSelector("input.input__textfield")).get(1);
     }
 
-    //Получение поля ввода пароля
+    @Step ("Получение поля ввода пароля")
     public WebElement getPasswordInput() {
         return driver.findElement(By.xpath("//input[@type='password']"));
     }
 
-    //Получение кнопки регистрации
+    @Step ("Получение кнопки регистрации")
     public WebElement getRegisterButton() {
         return driver.findElement(By.cssSelector("button.button_button_type_primary__1O7Bx"));
     }
 
-    //Регистрация пользователя с именем, почтой и паролем
+    @Step ("Регистрация пользователя с именем, почтой и паролем")
     public void register(String name, String email, String password) {
         this.getNameInput().clear();
         this.getNameInput().sendKeys(name);
@@ -52,7 +53,7 @@ public class RegistrationPage {
         this.getRegisterButton().click();
     }
 
-    //Проверка успешной регистрации
+    @Step ("Проверка успешной регистрации")
     public boolean isSuccessfulRegistration() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         try {
@@ -63,7 +64,7 @@ public class RegistrationPage {
         }
     }
 
-    //Проверка отображения ошибки ввода пароля
+    @Step ("Проверка отображения ошибки ввода пароля")
     public boolean isPasswordErrorDisplayed() {
         try {
             return driver.findElement(passwordError).isDisplayed();
@@ -72,7 +73,7 @@ public class RegistrationPage {
         }
     }
 
-    //Переход на страницу входа
+    @Step ("Переход на страницу входа")
     public void navigateToLogin() {
         By loginLink = By.xpath("//a[contains(text(),'Войти') or contains(@href, '/login')]");
         driver.findElement(loginLink).click();

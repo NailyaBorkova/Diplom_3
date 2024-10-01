@@ -1,6 +1,7 @@
-package pageObjects;
+package pageobjects;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,17 +18,17 @@ public class ProfilePage {
         this.driver = driver;
     }
 
-    //Получение кнопки выхода
+    @Step("Получение кнопки выхода")
     public WebElement getLogoutButton() {
         return driver.findElement(logoutButton);
     }
 
-    //Переход на главную страницу через кнопку 'Конструктор'
+    @Step ("Переход на главную страницу через кнопку 'Конструктор'")
     public void goToMainByConstructorButton() {
         driver.findElement(constructorButton).click();
     }
 
-    //Клик по логотипу для перехода на главную страницу
+    @Step ("Клик по логотипу для перехода на главную страницу")
     public void clickLogo() {
         driver.findElement(logo).click();
     }

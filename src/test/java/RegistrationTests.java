@@ -1,9 +1,15 @@
+import api.AuthApi;
+import api.User;
+import api.UserLogin;
+import generators.UserGenerators;
+import io.qameta.allure.Description;
+import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pageObjects.RegistrationPage;
-import pageObjects.WebDriverFactory;
+import pageobjects.RegistrationPage;
+import pageobjects.WebDriverFactory;
 
 import java.util.UUID;
 import static org.junit.Assert.assertTrue;
@@ -12,6 +18,11 @@ public class RegistrationTests {
 
     private WebDriver driver;
     private RegistrationPage registrationPage;
+    private String bearerToken;
+    private String token;
+    private User user;
+    private UserLogin login;
+    private AuthApi authApi;
 
     @Before
     public void setUp() {
@@ -23,20 +34,25 @@ public class RegistrationTests {
         registrationPage = new RegistrationPage(driver);
         registrationPage.open();
 
+        authApi = new AuthApi();
+        user = UserGenerators.getSuccessCreateUser();
+        login = new UserLogin(user.getEmail(), user.getPassword());
+
     }
 
+    @Description("Тест успешной регистрации")
     @Test
     public void testSuccessfulRegistration() {
 
-        String username = "TestUser" + UUID.randomUUID().toString().substring(0, 8);
-        String emailPrefix = "testuser";
-        String emailDomain = "example.com";
-        String email = emailPrefix + UUID.randomUUID().toString().substring(0, 8) + "@" + emailDomain;
-        registrationPage.register(username, email, "password123");
+        registrationPage.register(user.getName(), user.getEmail(), user.getPassword());
         assertTrue("The user should be registered successfully", registrationPage.isSuccessfulRegistration());
+        ValidatableResponse responseCreate = authApi.loginUserRequest(login);
+        bearerToken = responseCreate.extract().path("accessToken");
+        token = bearerToken.substring(7);
 
     }
 
+    @Description("Тест. Ошибка для некорректного пароля. Минимальный пароль — шесть символов")
     @Test
     public void testRegistrationWithShortPassword() {
 
@@ -50,6 +66,10 @@ public class RegistrationTests {
 
         if (driver != null) {
             driver.quit();
+        }
+
+        if(token != null){
+            authApi.deleteUserRequest(token);
         }
 
     }

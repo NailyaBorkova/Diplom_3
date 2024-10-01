@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.*;
-import pageObjects.WebDriverFactory;
+import pageobjects.*;
+import pageobjects.WebDriverFactory;
 
 public class ProfileTests {
     private AuthApi authApi;

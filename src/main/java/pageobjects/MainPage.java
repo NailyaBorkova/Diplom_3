@@ -1,6 +1,7 @@
-package pageObjects;
+package pageobjects;
 
 import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,7 +23,7 @@ public class MainPage {
         this.driver = driver;
     }
 
-    //Переход в профиль пользователя
+    @Step ("Переход в профиль пользователя")
     public void goToProfile() {
         driver.findElement(profileLink).click();
     }
@@ -31,32 +32,32 @@ public class MainPage {
         return profileLink;
     }
 
-    //Открытие главной страницы
+    @Step("Открытие главной страницы")
     public void open() {
         driver.get(mainPageUrl);
     }
 
-    //Переход на страницу входа
+    @Step ("Переход на страницу входа")
     public void navigateToLogin() {
         driver.findElement(loginLink).click();
     }
 
-    //Клик по вкладке 'Булки'
+    @Step ("Клик по вкладке 'Булки'")
     public void clickBunTab() {
         clickTab(bunTab);
     }
 
-    //Клик по вкладке 'Соусы'
+    @Step ("Клик по вкладке 'Соусы'")
     public void clickSauceTab() {
         clickTab(sauceTab);
     }
 
-    //Клик по вкладке 'Начинки'
+    @Step ("Клик по вкладке 'Начинки'")
     public void clickFillingTab() {
         clickTab(fillingTab);
     }
 
-    //Клик по вкладке
+    @Step ("Клик по вкладке")
     private void clickTab(By tabLocator) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement tab = wait.until(ExpectedConditions.elementToBeClickable(tabLocator));

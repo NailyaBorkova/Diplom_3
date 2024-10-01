@@ -3,8 +3,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.MainPage;
-import pageObjects.WebDriverFactory;
+import pageobjects.MainPage;
+import pageobjects.WebDriverFactory;
 
 import static org.junit.Assert.*;
 

@@ -2,6 +2,7 @@ import api.AuthApi;
 import api.User;
 import api.UserLogin;
 import generators.UserGenerators;
+import io.qameta.allure.Description;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Assert;
@@ -10,12 +11,12 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.LoginPage;
-import pageObjects.MainPage;
-import pageObjects.PasswordRecoveryPage;
-import pageObjects.ProfilePage;
-import pageObjects.RegistrationPage;
-import pageObjects.WebDriverFactory;
+import pageobjects.LoginPage;
+import pageobjects.MainPage;
+import pageobjects.PasswordRecoveryPage;
+import pageobjects.ProfilePage;
+import pageobjects.RegistrationPage;
+import pageobjects.WebDriverFactory;
 public class LoginTests {
 
     private AuthApi authApi;
@@ -57,6 +58,7 @@ public class LoginTests {
 
     }
 
+    @Description("Тествход по кнопке «Войти в аккаунт» на главной")
     @Test
     public void testLoginFromMainPage() {
 
@@ -67,6 +69,7 @@ public class LoginTests {
 
     }
 
+    @Description("Тест вход через кнопку в форме регистрации")
     @Test
     public void testLoginFromRegistrationPage() {
         registrationPage.open();
@@ -75,6 +78,7 @@ public class LoginTests {
         Assert.assertTrue("Login failed", loginPage.isLoginSuccessful());
     }
 
+    @Description("Тест входа после смены пароля")
     @Test
     public void testLoginAfterPasswordRecovery() {
 
