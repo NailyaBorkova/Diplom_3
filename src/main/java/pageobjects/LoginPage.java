@@ -45,7 +45,6 @@ public class LoginPage {
 
     @Step ("Проверка успешного входа в систему")
     public boolean isLoginSuccessful() {
-        String expectedUrl = "https://stellarburgers.nomoreparties.site/";
-        return driver.getCurrentUrl().contains(expectedUrl);
+        return driver.getCurrentUrl().contains(Environment.HOST);
     }
 }

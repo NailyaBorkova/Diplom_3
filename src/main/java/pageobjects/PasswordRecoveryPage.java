@@ -1,5 +1,6 @@
 package pageobjects;
 
+import config.Environment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,7 @@ public class PasswordRecoveryPage {
 
     @Step("Открытие страницы восстановления пароля")
     public void open() {
-        driver.get("https://stellarburgers.nomoreparties.site/forgot-password");
+        driver.get(Environment.HOST+Environment.FORGOT_PASSWORD);
     }
 
     @Step ("Переход на страницу входа через ссылку 'Войти'")

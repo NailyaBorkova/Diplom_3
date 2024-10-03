@@ -1,5 +1,6 @@
 package pageobjects;
 
+import config.Environment;
 import org.openqa.selenium.By;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
     private WebDriver driver;
-    private final String mainPageUrl = "https://stellarburgers.nomoreparties.site";
     private final By loginLink = By.cssSelector("button.button_button__33qZ0.button_button_type_primary__1O7Bx.button_button_size_large__G21Vg");
     private final By profileLink = By.xpath("//a[@href='/account']");
     private final By bunTab = By.xpath("//span[text()='Булки']");
@@ -34,7 +34,7 @@ public class MainPage {
 
     @Step("Открытие главной страницы")
     public void open() {
-        driver.get(mainPageUrl);
+        driver.get(Environment.HOST);
     }
 
     @Step ("Переход на страницу входа")

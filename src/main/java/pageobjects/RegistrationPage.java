@@ -1,5 +1,6 @@
 package pageobjects;
 
+import config.Environment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class RegistrationPage {
     private WebDriver driver;
     private By passwordError = By.xpath("//*[contains(@class,'input__error')]");
-    private String registrationUrl = "https://stellarburgers.nomoreparties.site/register";
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -19,7 +19,7 @@ public class RegistrationPage {
 
     @Step("Открытие страницы регистрации")
     public void open() {
-        driver.get(registrationUrl);
+        driver.get(Environment.HOST+Environment.REGISTER);
     }
 
     @Step ("Получение поля ввода имени")
@@ -57,7 +57,7 @@ public class RegistrationPage {
     public boolean isSuccessfulRegistration() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         try {
-            wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
+            wait.until(ExpectedConditions.urlToBe(Environment.HOST));
             return true;
         } catch (TimeoutException e) {
             return false;
